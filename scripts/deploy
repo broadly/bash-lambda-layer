@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # The script zips the contents of the public bash-lambda-layer repo and uploads it to Broadly's aws production account
 #
