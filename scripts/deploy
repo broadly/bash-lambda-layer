@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+
+# The script zips the contents of the public bash-lambda-layer repo and uploads it to Broadly's aws production account
+#
+# ./scripts/deploy
+#
+
+export AWS_DEFAULT_REGION=us-west-2
+
+rm -f layer.zip
+
+zip -yr layer.zip bootstrap bin/ lib/ libexec/ share/
+
+aws lambda publish-layer-version --layer-name bash --zip-file fileb://layer.zip
+
