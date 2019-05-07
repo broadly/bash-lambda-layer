@@ -6,11 +6,12 @@ set -euo pipefail
 # ./scripts/deploy
 #
 
-export AWS_DEFAULT_REGION=us-west-2
-
 rm -f layer.zip
-
 zip -yr layer.zip bootstrap bin/ lib/ libexec/ share/
 
+export AWS_DEFAULT_REGION=us-west-2
+aws lambda publish-layer-version --layer-name bash --zip-file fileb://layer.zip
+
+export AWS_DEFAULT_REGION=us-east-1
 aws lambda publish-layer-version --layer-name bash --zip-file fileb://layer.zip
 
