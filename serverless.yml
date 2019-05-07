@@ -1,0 +1,24 @@
+service: bash
+
+provider:
+  name: aws
+  stage: production
+
+layers:
+  bash:
+    name: bash
+    description: Bash custom runtime
+    path: .
+
+package:
+  include:
+    - index.sh
+
+functions:
+  check-bash-layer:
+    handler: index.test
+    runtime: provided
+    layers:
+      - {Ref: BashLambdaLayer}
+
+

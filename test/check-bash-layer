@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euo pipefail
+
+# ./test/check-bash-layer
+
+
+PATH=$PATH:$PWD/../node_modules/serverless/bin
+[ ! `which serverless` ] && echo "No serverless binary in PATH" && exit 1
+
+# Source syntax errors are not displayed in serverless
+source index.sh
+
+serverless invoke local \
+  -f check-bash-layer
+
